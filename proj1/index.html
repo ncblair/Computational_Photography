@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>Proj2</title>
+        <link rel = "stylesheet" type = "text/css" href = "../style.css">
+    </head>
+	<body>
+		<h1>Project 1: Images of the Russian Empire</h1>
+		<h2>Nathan Blair, CS194-26</h2>
+		<p>
+			My script aligns three-color images from photographs of individual color channels. These images are taken from the Prokudin-Gorskii collection of images of the Russian Empire in the early 1900s. Simply stacking the three channels on top of eachother is not sufficient, as the images are not perfectly aligned. So, I had to automatically align the images by checking many different alignments and seeing which one was the best. To score the best alignment, I used the sum squared difference metric. That is, the best alignment of two images was the alignment with the smallest sum((image1 - image2)^2) where subtraction and squaring happens element wise. 
+		</p>
+		<p>
+			Initially, I checked alignment at a circular shift of up to 15 pixels to left and up to 15 pixels to the right of the original image. I also checked shifts up and down. This worked well for small images like this one:
+		</p>
+		<img src="out/naive/monastery.jpg" width=100%>
+		<p>
+			However, on larger images, a more dramatic shift was necessary, so the naive method failed. As you can see, the so-called aligned image is not aligned at all. 
+		</p>
+		<img src="out/naive/emir.jpg" width=100%>
+		<p>
+			So, I implemented a new way to propose image shifts for alignment. First, I downsampled the images being aligned to 64x64 pixels. Then I attempt to align the images at lower resolution by checking a [-5, 5] region of pixel shifts. Once I get the shift in the 64x64 pixel domain, I move to a scale twice as large, 128x128 pixels. Once again, I attempt to align the images using a [-5, 5] pixel shift, however, I center my shifts around the shift estimate I got from the 64x64 pixel image. I keep doing this, doubling image resolution until I am at the original image size. This allows me to deal with shifts of upwards of 15% misalignment, with only 11*(log2(original_image_width) - 6) alignment checks. This is oposed to the original method, that would require me to make .15 * original_image_width checks. The new method is asymptotically faster. The results are shown below.
+		</p>
+		<img src="out/pyramid/emir.jpg" width=100%>
+		<p>
+			I was also able to:
+			<ul>
+				<li>
+					Intelligently crop the images by cropping out the regions that were circularly pushed to the other side as a result of the shift. 
+				</li>
+				<li>
+					Automatically add contrasting by rescaling image intensities such that the darkest pixel is zero (on its darkest color channel) and the brightest pixel is 1 (on its brightest color channel)
+				</li>
+			</ul> 
+			The results of my final program are shown below
+		</p>
+		<img src="out/bells/emir.jpg" width=100%>
+		<img src="out/bells/lynx.jpg" width=100%>
+		<img src="out/bells/boat_man.jpg" width=100%>
+		<img src="out/bells/icon.jpg" width=100%>
+		<img src="out/bells/train.jpg" width=100%>
+		<img src="out/bells/monastery.jpg" width=100%>
+		<img src="out/bells/three_generations.jpg" width=100%>
+		<img src="out/bells/settlers.jpg" width=100%>
+		<img src="out/bells/nativity.jpg" width=100%>
+		<img src="out/bells/lady.jpg" width=100%>
+		<img src="out/bells/cathedral.jpg" width=100%>
+		<img src="out/bells/turkmen.jpg" width=100%>
+		<img src="out/bells/harvesters.jpg" width=100%>
+		<img src="out/bells/self_portrait.jpg" width=100%>
+		<img src="out/bells/village.jpg" width=100%>
+	</body>
+</html>

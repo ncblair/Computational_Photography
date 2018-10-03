@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>Proj3</title>
+        <link rel = "stylesheet" type = "text/css" href = "../style.css">
+    </head>
+	<body>
+		<h1>Project 3: Fun with Frequencies and Gradients</h1>
+		<h2>Nathan Blair, CS194-26</h2>
+		<img src = "out/moth.jpg" width=100%>
+		<p>
+			This project explores different techniques for image blending and fusion. My first task was to take an image and artificially sharpen it by increasing the signal of high frequency components. The result can be seen below. The original image, the low frequency components, the high frequency components, and the sharpened image.
+		</p>
+		<img src = "out/warmup.jpg" width=50%>
+		<p>
+			Next, I was tasked with creating a composite image of low and high frequency components by aligning and blending two images together. Below, you can see that from far away while squinting, the low frequency image can be seen, while close up, the high frequency components can be seen. My results were a bit finicky for this part of the project. The low frequency image is a dog, and the high frequency image is a face. 
+		</p>
+		<img src="out/hybrid.jpg" width=50%>
+		<p>
+			Below, you can see the gaussian and laplacian stack for the above image. The gaussian stack on top consists of the image with a gaussian low pass filter applied over and over. The laplacian stack on bottom shows the difference between two adjacent elements in the gaussian pyramid, creating band-pass filters. 
+		</p>
+		<img src="out/hybrid_stack.jpg" width=50%>
+		<p>
+			Next, I used the idea of laplacian pyramids to create a smooth spline across images. Instead of a hard line when merging images, a smooth transition is created by blending the low and high frequency components of the images separately, and then reconnecting them. The results of combining an orange and an apple can be seen below. 
+		</p>
+		<img src="out/spline.jpg" width=50%>
+		<p>
+			The final portion of the project involved blending images from a given mask. For example, given this mask of mothra in both images, I can smoothly copy mothra into the image by minimizing the squared difference between pixels on the edge of the source image mask with the pixels on the edge of the target image mask while maintaining the source image gradient within the mask as much as possible. 
+		</p>
+		<img src="out/mothra_source.jpg" width=25%>
+		<img src="out/mothra_mask.jpg" width=25%>
+		<br>
+		<img src="out/lamp.jpg" width=25%>
+		<img src="out/lamp_mask.jpg" width=25%>
+		<img src="out/moth.jpg" width=100%>
+		<p>
+			Here are more examples:
+		</p>
+		<img src="out/croc.jpg" width=100%>
+		<img src="out/eagle.jpg" width=100%>
+		<img src="out/moon.jpg" width=100%>
+		<img src="out/penguin.jpg" width=100%>
+		<img src="out/rainbow.jpg" width=100%>
+		<img src="out/snowman.jpg" width=100%>
+		<img src="out/tattoo.jpg" width=100%>
+	</body>
+</html>
