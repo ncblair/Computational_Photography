@@ -1,6 +1,9 @@
 .title_im{
-	width:800px;
 	height:500px;
+}
+
+h1{
+    text-align:center;
 }
 
 h2{
@@ -16,4 +19,24 @@ p{
 img {
     display: block;
     margin: 0 auto;
+}
+
+video {
+    display: block;
+    margin: 0 auto;
+}
+
+.container{
+    display:block;
+    margin: 50px auto;
+    text-align:center;
+}
+
+.element{
+    display: inline;
+}
+
+
+figcaption{
+    margin: 10px
 }
