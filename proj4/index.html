@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <title>Proj4</title>
+        <link rel = "stylesheet" type = "text/css" href = "../style.css">
+    </head>
+	<body>
+		<h1>Project 4: Face Morphing and Modeling a Photo Collection</h1>
+		<h2>Nathan Blair, CS194-26</h2>
+        <figure class=container>
+            <img src="out/nathan.jpg" height=240px class=element>
+            <video height="240" autoplay muted loop class=element>
+                <source src="out/nathan_hair.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="out/facial_hair.jpg" height=240px class=element>
+            <figcaption>
+                Giving Myself Facial Hair
+            </figcaption>
+        </figure>
+		<p>
+			This project explores different techniques for face morphing. First, I morph my face into those of my friends. Then, I look at the average face of the IMM Face Database, and morph my face towards the average. Finally, I add characteristics to my face such as facial hair, femininity, and a smile. I do this by morphing my face in the direction from the average face in my face dataset to the average face with facial hair, average female face, or average smiling face. This method is completely data driven. That is, it requires me to label which faces have facial hair, but it does not require me to create a model of what facial hair is. 
+        </p>
+		<p>
+			My first task was to create a transition between myself and my friend Nick. To do this, I annotated both our faces with 58 keypoints that would be used for alignment during the morph. The point annotations were used to create a triangulation of the face using a Delaunay triangulation.
+		</p>
+        <figure class=container>
+            <img src="out/nathan_with_points.jpg" height=240px class=element>
+            <img src="out/nick_with_points.jpg" height=240px class=element>
+            <figcaption>
+                Annotating the Same Points on Each Face
+            </figcaption>
+        </figure>
+		<p>
+			Then, I computed 45 different partial morphs of the faces from completely my face to completely Nick's face. To compute these morphs, I aligned each triangle on my face with each corresponding triangle on nick's face using an affine transformation and cross-disolved over the colors. 
+		</p>
+        <figure class=container>
+            <img src="out/nick.jpg" height=240px class=element>
+            <video height="240" autoplay muted loop class=element>
+                <source src="out/nick_nathan_transition2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="out/nathan.jpg" height=240px class=element>
+            <figcaption>
+                Nick to Nathan transition
+            </figcaption>
+        </figure>
+		<p>
+			Next, I downloaded the IMM Face Database and computed the average face in the database. I also computed the average for various subpopulations including male, female, smiling, not smiling, and facial hair. It shouldn't be noted that the IMM Face Database contains 40 face images of 33 white men and 7 white women. Likewise, the means are biased in that way. 
+		</p>
+        
+        <figure class=container>
+            <img src="out/ex1.jpg" height=200px class=element>
+            <img src="out/ex2.jpg" height=200px class=element>
+            <img src="out/ex3.jpg" height=200px class=element>
+            <img src="out/ex4.jpg" height=200px class=element>
+            <img src="out/ex5.jpg" height=200px class=element>
+            <img src="out/ex6.jpg" height=200px class=element>
+            <figcaption>
+                Some Examples from the IMM Database
+            </figcaption>
+        </figure>
+        
+        <figure class=container>
+            <img src="out/male.jpg" height=240px class=element>
+            <img src="out/female.jpg" height=240px class=element>
+            <img src="out/smiling.jpg" height=240px class=element>
+            <img src="out/frown.jpg" height=240px class=element>
+            <img src="out/facial_hair.jpg" height=240px class=element>
+            <img src="out/average.jpg" height=240px class=element>
+            <figcaption>
+                Various Subpopulation Means: Male, Female, Smiling, Frowning, Facial Hair, Average
+            </figcaption>
+        </figure>
+		<p>
+			I morphed my face into the average face that was not smiling. As you can see, some features did not line up perfect. This is because of the different setting in which the pictures were taken. Notable differences include the width of the face in the picture and the fact that my nostrils are not visible while the IMM face nostrils are. 
+		</p>
+        <figure class=container>
+            <img src="out/nathan.jpg" height=240px class=element>
+            <video height="240" autoplay muted loop class=element>
+                <source src="out/me_to_average_not_smiling.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="out/frown.jpg" height=240px class=element>
+            <figcaption>
+                My face morphing into the average face. 
+            </figcaption>
+        </figure>
+        <p>
+			Finally, I was able to add characteristics to my face and my friends' by morphing in the direction from the average to various subpopulation means. It is important to note that I did not move my face to the subpopulation mean. Instead, I changed my face in the same ways an average face would change to get to the subpopulation mean. I was most succesful by morphing smiles and facial hair. I also tried changing gender, but was less succesful doing this. 
+		</p>
+        <figure class=container>
+            <img src="out/nathan.jpg" height=240px class=element>
+            <video height="240" autoplay muted loop class=element>
+                <source src="out/nathan_smiling_transition.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="out/nathan_smiling_result.jpg" height=240px class=element>
+            <br>
+            <img src="out/nick.jpg" height=240px class=element>
+            <video height="240" autoplay muted loop class=element>
+                <source src="out/nick_smiling_transition.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="out/nick_smiling_result.jpg" height=240px class=element>
+            <br>
+            <img src="out/bella.jpg" height=240px class=element>
+            <video height="240" autoplay muted loop class=element>
+                <source src="out/bella_smiling_transition.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="out/bella_smiling_result.jpg" height=240px class=element>
+            <figcaption>
+                Adding a Smile. Original, Video Transition, Smiling.
+            </figcaption>
+        </figure>
+        
+        <p>
+        For facial hair, I morphed three times the distance from the mean image to the subpopulation mean image to accentuate the transition. 
+        </p>
+        
+        <figure class=container>
+            <img src="out/nathan.jpg" height=240px class=element>
+            <video height="240" autoplay muted loop class=element>
+                <source src="out/nathan_hair.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="out/nathan_facial_hair_result.jpg" height=240px class=element>
+            <br>
+            <img src="out/nick.jpg" height=240px class=element>
+            <video height="240" autoplay muted loop class=element>
+                <source src="out/nick_hair.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="out/nick_facial_hair_result.jpg" height=240px class=element>
+            <br>
+            <figcaption>
+                Adding Facial Hair.
+            </figcaption>
+        </figure>
+        <p>
+        I tried adding more female features to myself. If I had a larger database I think this could have been a more representative transition. For example, I think my face was arbitrarily widened because the female faces in this particular database happened to be wider than the average face. 
+        </p>
+        
+        <figure class=container>
+            <img src="out/nathan.jpg" height=240px class=element>
+            <video height="240" autoplay muted loop class=element>
+                <source src="out/nathan_female_transition.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <img src="out/nathan_female_result.jpg" height=240px class=element>
+            <figcaption>
+                Morphing Genders.
+            </figcaption>
+        </figure>
+	</body>
+</html>
